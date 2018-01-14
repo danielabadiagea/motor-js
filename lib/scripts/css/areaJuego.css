@@ -1,0 +1,138 @@
+		:root {
+			--ancho : 480px;
+			--alto : 320px;
+			--tiempo: 25s;
+			counter-reset: puntaje;
+		}
+		h2 {
+			text-align: center;
+		}
+		#areaJ {
+			position: relative;
+			border: 1px solid;
+			width: var(--ancho);
+			height: var(--alto);
+			/* Reemplaza fondo por la img que quieras de fondo */
+			left: 50%;
+			transform: translateX(-50%);
+			/* Reemplaza mouse por la img que quieras de mouse */
+			cursor: url("mouse"), default;
+		}
+		#areaJ input[type=checkbox]{
+			visibility: hidden;
+			float: left;
+		}
+		#areaJ label{
+			position: relative;
+			display: block;
+			width: 50px;
+			height: 50px;
+			/* Reemplaza objetivo por la img que quieras de objetivo */
+			background-image: url(objetivo);
+			margin-top: 5px;
+			/* Reemplaza mouse por la img que quieras de mouse */
+			cursor: url("mouse"), default;
+		}
+		#areaJ::after {
+			content: "Tu puntaje : "counter(puntaje);
+			position: absolute;
+			top: 0px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 24px;
+			font-weight: bold;
+		}
+		#areaJ input:checked {
+			counter-increment: puntaje;
+		}
+		#areaJ input::after {
+			content: "   ";
+			display: block;
+			position: absolute;
+			width: 70px;
+			height: 60px;
+			visibility: hidden;
+		}
+		#areaJ input:checked + label::after {
+			visibility: visible;
+		}
+		#areaJ input:checked + label{
+			visibility: hidden;
+			animation: explotar .2s linear forwards;
+		}
+		#loader {
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			border: 1px solid;
+			width: var(--ancho);
+			height: 30px;
+		}
+		#loader div{
+			height: 100%;
+			width: 1px;
+			background-color: red;
+			animation: cargar var(--tiempo) linear forwards;
+		}
+		#modal {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+			z-index: 200;
+			color: white;
+			text-align: center;
+			visibility: hidden;
+			animation: finjuego .5s linear var(--tiempo) forwards;
+		}
+		#modal a {
+			text-decoration: none;
+			font-size: 20px;
+			font-weight: bold;
+			background-color: white;
+			padding: 10px;
+			border-radius: 10px;
+			color: black;
+		}
+		@keyframes explotar{
+			from {
+				visibility: visible;
+				opacity: 1;
+			}
+			to {
+				visibility: hidden;
+				opacity: 0;
+			}
+		}
+		@keyframes cargar{
+			from {
+				width: 1px;
+			}
+			to {
+				width: 100%;
+			}
+		}
+		@keyframes finjuego{
+			from {
+				visibility: hidden;
+			}
+			to {
+				visibility: visible;
+			}
+		}
+		@keyframes mover{
+			0%{
+				left: 0px;
+				background-position-x: 0px;
+			}
+			49%{
+				background-position-x: 0px;
+			}
+			50%{
+				left: 430px;
+				background-position-x: 50px;
+			}
+			100%{
+				left: 0%;
+				background-position-x: 50px;
+		}
